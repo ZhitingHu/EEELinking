@@ -2,11 +2,15 @@
 
 #include <cmath>
 #include <vector>
+#include <string>
 #include "fastapprox/fastsigmoid.h"
 #include "fastapprox/fastexp.h"
 #include "fastapprox/fastlog.h"
 
 namespace entity {
+
+using std::string;
+using std::vector;
 
 // a = a + b.
 void VectorAdd(float* a, const float* b, int dim);
@@ -50,5 +54,15 @@ void FreeVector(std::vector<T*>& delete_vector) {
   }
   std::vector<T*>().swap(delete_vector);
 }
+
+void Tokenize(const string& str, vector<string>& tokens, 
+    const string& delimiters = " ");
+
+struct DesSortBySecondOfStrFloatPair {
+  bool operator() (const std::pair<std::string, float>& lhs,
+      const std::pair<std::string, float>& rhs) {
+    return (lhs.second > rhs.second);
+  }
+};
 
 }  // namespace entity

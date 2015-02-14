@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 
 # Entity linking parameters
-el_can_filename="/home/zhitingh/ml_proj/entity_linking/data/CSAW_new/CSAW_final_candidates_30.dat"
-el_gt_filename="/home/zhitingh/ml_proj/entity_linking/data/CSAW_new/CSAW_final_gt.dat"
+#el_can_filename="/home/zhitingh/ml_proj/EEELinking/data/CSAW_new/CSAW_final_candidates_30.dat"
+el_gt_filename="/home/zhitingh/ml_proj/EEELinking/data/CSAW_new/CSAW_final_gt.dat"
 el_out_filename="el_out.dat"
-max_iter=100
+dict_filename="/home/zhitingh/ml_proj/EEEL/data/entity_linking/mention_entity_dict_comb_corrected"
+max_iter=20
+truncate_level=30
+
 # Figure out the paths.
 script_path=`readlink -f $0`
 script_dir=`dirname $script_path`
@@ -18,7 +21,7 @@ dataset_name=whole
 #dataset_path="${app_dir}/data/${dataset_name}"
 dataset_path="${app_dir}/../EEEL/data/${dataset_name}"
 
-resume_iter=352000
+resume_iter=704000
 
 ## Parameters
 # embedding
@@ -26,7 +29,7 @@ dim_embedding=100;
 distance_metric_mode="DIAG";
 num_neg_sample=5
 
-output_dir="/home/zhitingh/ml_proj/EEEL_dim100_whole_min_ca/output/eeel_whole_D100_MDIAG_lr10_N5_B500-whole-min-ca-336000"
+output_dir="/home/zhitingh/ml_proj/EEEL_dim100_whole_min_ca/output/eeel_whole_D100_MDIAG_lr0.4_N5_B500-whole-min-ca-528000"
 log_dir=${output_dir}/entitylinking_logs
 mkdir -p ${log_dir}
 
@@ -47,7 +50,8 @@ GLOG_vmodule="" \
     --dataset_path $dataset_path \
     --output_file_prefix $output_dir \
     --num_neg_sample $num_neg_sample \
-    --el_can_filename $el_can_filename \
+    --dict_filename $dict_filename \
     --el_gt_filename $el_gt_filename \
     --el_out_filename $el_out_filename \
-    --max_iter $max_iter
+    --max_iter $max_iter \
+    --truncate_level $truncate_level

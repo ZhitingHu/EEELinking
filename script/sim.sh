@@ -13,24 +13,21 @@ dataset_name=whole
 #dataset_path="${app_dir}/data/${dataset_name}"
 dataset_path="${app_dir}/../EEEL/data/${dataset_name}"
 
-resume_iter=352000
+#resume_iter=672000
+#resume_iter=608000 #0.5792
+#resume_iter=704000 #0.5744
+#resume_iter=768000 #0.5813
+resume_iter=832000 #0.5739
 
-wordsim_filename="${app_dir}/../data/wordsim/combined.tab.conv"
+wordsim_filename="${app_dir}/data/wordsim/combined.tab.conv"
 ## Parameters
 # embedding
 dim_embedding=100;
 distance_metric_mode="DIAG";
-
-# solver parameters (for specifying output_dir)
-learning_rate=10
 num_neg_sample=5
-batch_size=500
 
-# Output
-output_dir=${app_dir}/output
-output_dir="${output_dir}/eeel_${dataset_name}_D${dim_embedding}_M${distance_metric_mode}"
-output_dir="${output_dir}_lr${learning_rate}_N${num_neg_sample}_B${batch_size}-whole-min-ca"
-log_dir=${output_dir}/analysis_logs
+output_dir="/home/zhitingh/ml_proj/EEEL_dim100_whole_min_ca/output/eeel_whole_D100_MDIAG_lr0.2_N5_B500-whole-min-ca-704000"
+log_dir=${output_dir}/sim_logs
 mkdir -p ${log_dir}
 
 # Run
